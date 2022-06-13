@@ -793,10 +793,6 @@ analysis = get_multiple_analysis(screener="indonesia", interval=Interval.INTERVA
 ])
 
 for key, value in analysis.items():
-    if value!='None' and value.summary["RECOMMENDATION"]=='BUY':
+    #print(key, ':', value)
+    if value is not None and value.summary["RECOMMENDATION"]=='BUY':
         print(key, ' : ', value.summary)
-
-
-
-#print(tesla.get_analysis().summary)
-# Example output: {"RECOMMENDATION": "BUY", "BUY": 8, "NEUTRAL": 6, "SELL": 3}
