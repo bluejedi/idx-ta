@@ -1,4 +1,7 @@
 from tradingview_ta import *
+
+#https://symbol-search.tradingview.com/symbol_search/v3/?text=&hl=1&exchange=&lang=id_ID&search_type=stocks&domain=production&sort_by_country=ID
+
 analysis = get_multiple_analysis(screener="indonesia", interval=Interval.INTERVAL_1_DAY, symbols=[
 "idx:goto"
 ,"idx:AALI"
@@ -794,5 +797,10 @@ analysis = get_multiple_analysis(screener="indonesia", interval=Interval.INTERVA
 
 for key, value in analysis.items():
     #print(key, ':', value)
-    if value is not None and value.summary["RECOMMENDATION"]=='BUY':
-        print(key, ' : ', value.summary)
+    if (
+        value is not None 
+        and value.summary["RECOMMENDATION"]=='STRONG_BUY' 
+        and value.indicators["volume"] > 30000000
+        and value.indicators["Stoch.K"] > value.indicators["Stoch.D"]
+    ):
+        print(key, ' : ', 'summary : ', value.summary["RECOMMENDATION"], 'STO_Up ', 'StoK : ', value.indicators["Stoch.K"],'StoD : ', value.indicators["Stoch.D"], 'Vol : ', value.indicators["volume"] )
